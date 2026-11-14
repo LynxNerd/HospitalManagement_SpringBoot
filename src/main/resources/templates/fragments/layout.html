@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title th:text="${title} + ' · CareDesk'">CareDesk</title>
+  <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<nav th:fragment="nav" class="topbar">
+  <a class="brand" th:href="@{/}"><span class="brand-mark">+</span> CareDesk</a>
+  <div class="nav-links"><a th:href="@{/patients}">Patients</a><a th:href="@{/doctors}">Doctors</a></div>
+</nav>
+</body>
+</html>

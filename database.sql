@@ -1,0 +1,17 @@
+CREATE DATABASE IF NOT EXISTS hospital;
+USE hospital;
+
+CREATE TABLE IF NOT EXISTS doctors (
+    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    specialization VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS patients (
+    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    age INT NOT NULL,
+    disease VARCHAR(150) NOT NULL,
+    doctor_id BIGINT NULL UNIQUE,
+    CONSTRAINT fk_patient_doctor FOREIGN KEY (doctor_id) REFERENCES doctors(id)
+);

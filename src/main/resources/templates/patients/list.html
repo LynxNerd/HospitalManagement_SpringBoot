@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Patients')}"></head>
+<body><nav th:replace="~{fragments/layout :: nav}"></nav>
+<main class="container page">
+  <div class="page-heading"><div><p class="eyebrow">PATIENT RECORDS</p><h1>Patients</h1><p class="muted">View and update patient information and doctor assignments.</p></div><a class="button" th:href="@{/patients/new}">＋ Add patient</a></div>
+  <div class="notice" th:if="${message}" th:text="${message}"></div>
+  <section class="panel"><div class="empty" th:if="${#lists.isEmpty(patients)}"><h2>No patient records yet</h2><p>Add a patient to begin managing care.</p></div>
+    <div class="table-wrap" th:unless="${#lists.isEmpty(patients)}"><table><thead><tr><th>Patient</th><th>Age</th><th>Condition</th><th>Doctor</th><th></th></tr></thead><tbody>
+      <tr th:each="patient : ${patients}"><td><strong th:text="${patient.name}">Name</strong><small th:text="${'ID ' + patient.id}">ID</small></td><td th:text="${patient.age}">0</td><td th:text="${patient.disease}">Condition</td><td th:text="${patient.doctor != null ? patient.doctor.name : 'Unassigned'}">Unassigned</td><td class="row-actions"><a class="text-link" th:href="@{/patients/{id}/edit(id=${patient.id})}">Edit</a><form th:action="@{/patients/{id}/delete(id=${patient.id})}" method="post"><button class="text-link danger" type="submit" onclick="return confirm('Delete this patient record?')">Delete</button></form></td></tr>
+    </tbody></table></div>
+  </section>
+</main></body></html>

@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Doctor details')}"></head>
+<body><nav th:replace="~{fragments/layout :: nav}"></nav>
+<main class="container page narrow"><a class="back-link" th:href="@{/doctors}">← Back to doctors</a><section class="panel form-panel"><p class="eyebrow">CARE TEAM</p><h1 th:text="${doctor.id == null} ? 'Add a doctor' : 'Edit doctor'">Doctor</h1>
+  <form th:action="${formAction}" th:object="${doctor}" method="post" class="form-grid">
+    <label>Full name<input th:field="*{name}" placeholder="e.g. Asha Mehta" required maxlength="100"><small class="error" th:errors="*{name}"></small></label>
+    <label>Specialization<input th:field="*{specialization}" placeholder="e.g. Cardiology" required maxlength="100"><small class="error" th:errors="*{specialization}"></small></label>
+    <div class="form-actions"><a class="button secondary" th:href="@{/doctors}">Cancel</a><button class="button" type="submit">Save doctor</button></div>
+  </form></section></main></body></html>

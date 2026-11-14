@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Patient details')}"></head>
+<body><nav th:replace="~{fragments/layout :: nav}"></nav>
+<main class="container page narrow"><a class="back-link" th:href="@{/patients}">← Back to patients</a><section class="panel form-panel"><p class="eyebrow">PATIENT RECORDS</p><h1 th:text="${patient.id == null} ? 'Add a patient' : 'Edit patient'">Patient</h1>
+  <form th:action="${formAction}" th:object="${patient}" method="post" class="form-grid">
+    <label>Full name<input th:field="*{name}" placeholder="Patient name" required maxlength="100"><small class="error" th:errors="*{name}"></small></label>
+    <label>Age<input th:field="*{age}" type="number" min="0" max="150" placeholder="Age" required><small class="error" th:errors="*{age}"></small></label>
+    <label>Condition / diagnosis<input th:field="*{disease}" placeholder="e.g. Seasonal allergy" required maxlength="150"><small class="error" th:errors="*{disease}"></small></label>
+    <label>Assigned doctor<select name="doctorId"><option value="">No doctor assigned</option><option th:each="doctor : ${doctors}" th:value="${doctor.id}" th:text="${doctor.name + ' · ' + doctor.specialization}" th:selected="${patient.doctor != null and patient.doctor.id == doctor.id}"></option></select><small class="error" th:if="${#fields.hasErrors('doctor')}" th:errors="*{doctor}"></small><small class="muted">Each doctor can be assigned to one patient at a time.</small></label>
+    <div class="form-actions"><a class="button secondary" th:href="@{/patients}">Cancel</a><button class="button" type="submit">Save patient</button></div>
+  </form></section></main></body></html>

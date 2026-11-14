@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Doctors')}"></head>
+<body><nav th:replace="~{fragments/layout :: nav}"></nav>
+<main class="container page">
+  <div class="page-heading"><div><p class="eyebrow">CARE TEAM</p><h1>Doctors</h1><p class="muted">Manage your medical staff and their specialties.</p></div><a class="button" th:href="@{/doctors/new}">＋ Add doctor</a></div>
+  <div class="notice" th:if="${message}" th:text="${message}"></div>
+  <section class="panel">
+    <div class="empty" th:if="${#lists.isEmpty(doctors)}"><h2>No doctors yet</h2><p>Add your first doctor to get started.</p></div>
+    <div class="table-wrap" th:unless="${#lists.isEmpty(doctors)}"><table><thead><tr><th>Doctor</th><th>Specialization</th><th>Assignment</th><th></th></tr></thead><tbody>
+      <tr th:each="doctor : ${doctors}"><td><strong th:text="${doctor.name}">Name</strong><small th:text="${'ID ' + doctor.id}">ID</small></td><td th:text="${doctor.specialization}">Specialty</td><td><span class="pill" th:classappend="${doctor.patient != null} ? ' assigned' : ''" th:text="${doctor.patient != null} ? 'Assigned' : 'Available'">Available</span></td><td class="row-actions"><a class="text-link" th:href="@{/doctors/{id}/edit(id=${doctor.id})}">Edit</a><form th:action="@{/doctors/{id}/delete(id=${doctor.id})}" method="post"><button class="text-link danger" type="submit" onclick="return confirm('Delete this doctor?')">Delete</button></form></td></tr>
+    </tbody></table></div>
+  </section>
+</main></body></html>

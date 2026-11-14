@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Hospital Management')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: nav}"></nav>
+<main class="container">
+  <section class="hero">
+    <p class="eyebrow">HOSPITAL MANAGEMENT</p>
+    <h1>Care starts with<br><span>better coordination.</span></h1>
+    <p class="lead">Keep patient records and doctor assignments organized in one place.</p>
+    <div class="actions"><a class="button" th:href="@{/patients}">View patients</a><a class="button secondary" th:href="@{/doctors}">View doctors</a></div>
+  </section>
+  <section class="stats">
+    <article class="stat"><span>Registered patients</span><strong th:text="${patientCount}">0</strong></article>
+    <article class="stat"><span>Medical staff</span><strong th:text="${doctorCount}">0</strong></article>
+  </section>
+</main>
+</body>
+</html>
